@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EVA Mobile Rev 4.0.2</title>
+    <title>EVAよしこ Rev 4.0.3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Squada+One&family=Noto+Sans+JP:wght@700;900&display=swap');
@@ -11,27 +11,24 @@
         body { background-color: #1a0505; color: #ef4444; font-family: 'Noto Sans JP', sans-serif; height: 100dvh; width: 100%; margin: 0; padding: 8px; overflow: hidden; display: flex; flex-direction: column; }
         
         .app-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; border-bottom: 1px solid #7f1d1d; }
-        .main-title { font-family: 'Squada One', cursive; color: #ef4444; font-size: 1.5rem; }
+        .main-title { font-family: 'Squada One', cursive; color: #ef4444; font-size: 1.2rem; }
         .rev-tag { font-family: 'Share Tech Mono', monospace; font-size: 8px; color: #7f1d1d; }
         
-        /* 入力フォームの超圧縮 */
-        .input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 6px; }
-        .eva-input { background: #2d0a0a; border: 1px solid #7f1d1d; color: #ffffff; padding: 4px 6px; font-size: 12px; border-radius: 4px; outline: none; text-align: center; }
-        .full-input { grid-column: span 3; border-color: #ef4444; font-weight: bold; }
-        .input-label { font-size: 8px; color: #7f1d1d; text-align: center; margin-bottom: 1px; }
+        .input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px; }
+        .eva-input { background: #2d0a0a; border: 1px solid #7f1d1d; color: #ffffff; padding: 6px; font-size: 14px; border-radius: 4px; outline: none; text-align: center; width: 100%; }
+        .full-input { grid-column: span 3; border-color: #ef4444; }
+        .input-label { font-size: 9px; color: #f87171; text-align: center; margin-bottom: 1px; font-weight: bold; }
 
-        .main-btn { background: #991b1b; border: 1px solid #ef4444; border-radius: 6px; cursor: pointer; height: 36px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
-        .main-btn span { font-weight: 900; font-size: 1rem; color: #ffffff; letter-spacing: 2px; }
+        .main-btn { background: linear-gradient(180deg, #db2777 0%, #991b1b 100%); border: 2px solid #f472b6; border-radius: 12px; cursor: pointer; height: 55px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; box-shadow: 0 0 15px rgba(219, 39, 119, 0.4); }
+        .main-btn span { font-weight: 900; font-size: 1.6rem; color: #ffffff; letter-spacing: 2px; text-shadow: 1px 1px 2px #000; }
         
-        .panel-frame { border: 1px solid #7f1d1d; background: #2d0a0a; border-radius: 6px; padding: 6px; }
-        .bar-bg { background-color: #1a0505; height: 6px; border-radius: 3px; overflow: hidden; border: 1px solid #7f1d1d; margin-top: 2px; }
+        .panel-frame { border: 1px solid #7f1d1d; background: #2d0a0a; border-radius: 8px; padding: 10px; flex-shrink: 0; }
+        .bar-bg { background-color: #1a0505; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid #7f1d1d; margin-top: 2px; }
         .bar-fill { height: 100%; width: 0%; transition: width 0.8s ease-out; }
         
-        .log-container { flex-grow: 1; min-height: 0; margin: 6px 0; border: 1px solid #7f1d1d; background-color: #000000; border-radius: 6px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .copy-btn { position: absolute; top: 4px; right: 4px; background: #991b1b; color: #fff; font-size: 7px; padding: 2px 6px; border-radius: 3px; z-index: 20; }
-        .log-body { padding: 6px; font-size: 9px; height: 100%; overflow-y: auto; color: #f87171; font-family: 'Share Tech Mono', monospace; padding-top: 20px; }
+        .log-container { height: 30%; min-height: 0; margin-top: 8px; border: 1px solid #7f1d1d; background-color: #000000; border-radius: 6px; overflow: hidden; position: relative; }
+        .log-body { padding: 8px; font-size: 10px; height: 100%; overflow-y: auto; color: #f87171; font-family: 'Share Tech Mono', monospace; line-height: 1.4; }
         
-        /* 設定別カラー */
         .c-s1 { color: #f87171; } .bg-s1 { background-color: #f87171; }
         .c-s2 { color: #fca5a5; } .bg-s2 { background-color: #fca5a5; }
         .c-s3 { color: #fecaca; } .bg-s3 { background-color: #fecaca; }
@@ -42,54 +39,53 @@
 </head>
 <body>
     <div class="app-header">
-        <div class="main-title">EVA ANALYZER</div>
-        <div class="rev-tag">Rev 4.0.2</div>
+        <div class="main-title">EVA-YOSHIKO</div>
+        <div class="rev-tag">Rev 4.0.3</div>
     </div>
 
     <div class="input-grid">
-        <div class="full-input"><div class="input-label">TOTAL GAMES</div><input type="number" id="in-g" class="eva-input w-full" inputmode="numeric"></div>
-        <div><div class="input-label">BB</div><input type="number" id="in-bb" class="eva-input w-full" inputmode="numeric"></div>
-        <div><div class="input-label">RB</div><input type="number" id="in-rb" class="eva-input w-full" inputmode="numeric"></div>
-        <div><div class="input-label">BEL</div><input type="number" id="in-bel" class="eva-input w-full" inputmode="numeric"></div>
-        <div><div class="input-label">CHE</div><input type="number" id="in-che" class="eva-input w-full" inputmode="numeric"></div>
-        <div><div class="input-label">WSW</div><input type="number" id="in-wsw" class="eva-input w-full" inputmode="numeric"></div>
+        <div class="full-input"><div class="input-label">総ゲーム数</div><input type="number" id="in-g" class="eva-input" inputmode="numeric"></div>
+        <div><div class="input-label">ビッグ</div><input type="number" id="in-bb" class="eva-input" inputmode="numeric"></div>
+        <div><div class="input-label">レギュラー</div><input type="number" id="in-rb" class="eva-input" inputmode="numeric"></div>
+        <div><div class="input-label">🔔</div><input type="number" id="in-bel" class="eva-input" inputmode="numeric"></div>
+        <div><div class="input-label">🍒</div><input type="number" id="in-che" class="eva-input" inputmode="numeric"></div>
+        <div><div class="input-label">弱🍉</div><input type="number" id="in-wsw" class="eva-input" inputmode="numeric"></div>
     </div>
 
-    <button id="exec-btn" class="main-btn"><span>ANALYZE</span></button>
+    <button id="exec-btn" class="main-btn"><span>💕よしこ💕</span></button>
 
     <div class="result-card panel-frame">
-        <div class="grid grid-cols-3 gap-x-2">
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s1 text-[8px]">S1</span><span id="p1" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b1" class="bar-fill bg-s1"></div></div></div>
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s2 text-[8px]">S2</span><span id="p2" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b2" class="bar-fill bg-s2"></div></div></div>
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s3 text-[8px]">S3</span><span id="p3" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b3" class="bar-fill bg-s3"></div></div></div>
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s4 text-[8px]">S4</span><span id="p4" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b4" class="bar-fill bg-s4"></div></div></div>
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s5 text-[8px]">S5</span><span id="p5" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b5" class="bar-fill bg-s5"></div></div></div>
-            <div class="mb-1"><div class="flex justify-between"><span class="c-s6 text-[8px]">S6</span><span id="p6" class="text-[9px]">--</span></div><div class="bar-bg"><div id="b6" class="bar-fill bg-s6"></div></div></div>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div><div class="flex justify-between"><span class="c-s1 text-[11px] font-bold">設定1</span><span id="p1" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b1" class="bar-fill bg-s1"></div></div></div>
+            <div><div class="flex justify-between"><span class="c-s2 text-[11px] font-bold">設定2</span><span id="p2" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b2" class="bar-fill bg-s2"></div></div></div>
+            <div><div class="flex justify-between"><span class="c-s3 text-[11px] font-bold">設定3</span><span id="p3" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b3" class="bar-fill bg-s3"></div></div></div>
+            <div><div class="flex justify-between"><span class="c-s4 text-[11px] font-bold">設定4</span><span id="p4" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b4" class="bar-fill bg-s4"></div></div></div>
+            <div><div class="flex justify-between"><span class="c-s5 text-[11px] font-bold">設定5</span><span id="p5" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b5" class="bar-fill bg-s5"></div></div></div>
+            <div><div class="flex justify-between"><span class="c-s6 text-[11px] font-bold">設定6</span><span id="p6" class="text-[12px] font-bold">--</span></div><div class="bar-bg"><div id="b6" class="bar-fill bg-s6"></div></div></div>
         </div>
     </div>
 
-    <div class="log-container"><button id="copy-log" class="copy-btn">COPY</button><div id="log-display" class="log-body">NERV MAGI: ONLINE</div></div>
+    <div class="log-container"><div id="log-display" class="log-body">待機中...</div></div>
 
 <script>
 const EVA_CONFIG = [
-    { id: "bb", name: "BB", probs: {1: 300.6, 2: 290.0, 3: 281.3, 4: 266.4, 5: 254.0, 6: 240.9} },
-    { id: "rb", name: "RB", probs: {1: 569.9, 2: 546.1, 3: 508.0, 4: 474.9, 5: 442.8, 6: 404.5} },
-    { id: "bel", name: "ベル", probs: {1: 8.0, 2: 7.88, 3: 7.76, 4: 7.64, 5: 7.52, 6: 7.4} },
-    { id: "che", name: "チェリー", probs: {1: 60.0, 2: 57.4, 3: 54.8, 4: 52.2, 5: 49.6, 6: 47.0} },
-    { id: "wsw", name: "弱スイカ", probs: {1: 79.0, 2: 76.4, 3: 73.8, 4: 71.2, 5: 68.6, 6: 66.0} }
+    { id: "bb", name: "ビッグ", probs: {1: 300.6, 2: 290.0, 3: 281.3, 4: 266.4, 5: 254.0, 6: 240.9} },
+    { id: "rb", name: "レギュラー", probs: {1: 569.9, 2: 546.1, 3: 508.0, 4: 474.9, 5: 442.8, 6: 404.5} },
+    { id: "bel", name: "🔔", probs: {1: 8.0, 2: 7.88, 3: 7.76, 4: 7.64, 5: 7.52, 6: 7.4} },
+    { id: "che", name: "🍒", probs: {1: 60.0, 2: 57.4, 3: 54.8, 4: 52.2, 5: 49.6, 6: 47.0} },
+    { id: "wsw", name: "弱🍉", probs: {1: 79.0, 2: 76.4, 3: 73.8, 4: 71.2, 5: 68.6, 6: 66.0} }
 ];
 
 const logDisplay = document.getElementById('log-display');
-const addLog = (m, c="text-red-900") => {
+const addLog = (m, c="") => {
     const e = document.createElement('div'); e.className = c; e.innerHTML = m;
-    logDisplay.appendChild(e);
+    logDisplay.appendChild(e); logDisplay.scrollTop = logDisplay.scrollHeight;
 };
 
 document.getElementById('exec-btn').addEventListener('click', () => {
     const n = parseInt(document.getElementById('in-g').value) || 0;
-    if (n < 10) return;
+    if (n < 1) return;
     logDisplay.innerHTML = "";
-    addLog("MAGI SYS START", "text-red-400 font-bold");
 
     const inputs = {
         bb: parseInt(document.getElementById('in-bb').value) || 0,
@@ -100,13 +96,37 @@ document.getElementById('exec-btn').addEventListener('click', () => {
     };
 
     let lls = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
+    let intensityData = [];
+
     EVA_CONFIG.forEach(def => {
         const k = inputs[def.id];
-        addLog(`${def.name}:${k} (1/${(n/k||0).toFixed(1)})`);
+        let itemLLs = {};
         [1,2,3,4,5,6].forEach(s => {
             const p = 1 / def.probs[s];
-            lls[s] += (k * Math.log(p) + (n - k) * Math.log(1 - p));
+            itemLLs[s] = (k * Math.log(p) + (n - k) * Math.log(1 - p));
+            lls[s] += itemLLs[s];
         });
+        const vals = Object.values(itemLLs);
+        intensityData.push({ id: def.id, name: def.name, intensity: Math.max(...vals) - Math.min(...vals), itemLLs, maxL: Math.max(...vals) });
+    });
+
+    const top3Ids = [...intensityData].sort((a,b) => b.intensity - a.intensity).slice(0, 3).map(x => x.id);
+
+    addLog("■ 項目別 尤度強度ギャップ", "text-red-400 font-bold mb-1");
+    intensityData.forEach(calc => {
+        let nameColor = "";
+        const rank = top3Ids.indexOf(calc.id);
+        if(rank === 0) nameColor = "text-red-500 font-bold";
+        else if(rank === 1) nameColor = "text-orange-500 font-bold";
+        else if(rank === 2) nameColor = "text-yellow-500 font-bold";
+
+        const stars = [1,2,3,4,5,6].map(s => {
+            const g = calc.maxL - calc.itemLLs[s];
+            const sStr = g < 0.2 ? "★★" : g < 1.0 ? "★☆" : "☆☆";
+            return g < 0.2 ? `<b class="text-white">${sStr}</b>` : sStr;
+        }).join(" ");
+
+        addLog(`<span class="${nameColor}">${calc.name.padEnd(5, '　')}</span> ${stars}`);
     });
 
     const max = Math.max(...Object.values(lls));
@@ -118,12 +138,6 @@ document.getElementById('exec-btn').addEventListener('click', () => {
         document.getElementById(`b${s}`).style.width = p + "%";
     });
 });
-
-document.getElementById('copy-log').onclick = () => {
-    const a = document.createElement('textarea'); a.value = logDisplay.innerText;
-    document.body.appendChild(a); a.select(); document.execCommand('copy');
-    document.body.removeChild(a); alert("COPIED");
-};
 </script>
 </body>
 </html>
